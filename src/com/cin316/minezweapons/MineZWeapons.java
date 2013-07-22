@@ -36,12 +36,14 @@ public class MineZWeapons extends JavaPlugin{
 		};
 		weapons = new String[]{
 				ChatColor.YELLOW + "" + "Weapons available:",
-				ChatColor.YELLOW + "" + ChatColor.BOLD + "Kikuichimonji"
+				ChatColor.YELLOW + "" + ChatColor.BOLD + "Kikuichimonji",
+				ChatColor.YELLOW + "" + ChatColor.BOLD + "Robber's_Blade"
 		};
 		
 		log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " has been enabled.");
 		
 		pluginManager.registerEvents( new KikuichimonjiListener(this), this );
+		pluginManager.registerEvents( new RobbersBladeListener(this), this );
 	}
 	
 	public void onDisable(){
@@ -89,7 +91,15 @@ public class MineZWeapons extends JavaPlugin{
 							
 							ItemStack is = new ItemStack(Material.WOOD_SWORD, 1); //Make a stack of 1 Wood Sword
 							ItemMeta im = is.getItemMeta();
-							im.setDisplayName(ChatColor.ITALIC + "Kikuichimonji"); //Set its name to KiKuichimonji.
+							im.setDisplayName(ChatColor.ITALIC + "Kikuichimonji"); //Set its name to Kikuichimonji.
+							is.setItemMeta(im);
+							player.getInventory().addItem(is);
+							
+						}else if( args[1].equalsIgnoreCase("robber's_blade") ){
+							
+							ItemStack is = new ItemStack(Material.WOOD_SWORD, 1); //Make a stack of 1 Wood Sword
+							ItemMeta im = is.getItemMeta();
+							im.setDisplayName(ChatColor.ITALIC + "Robber's Blade"); //Set its name to Robber's Blade.
 							is.setItemMeta(im);
 							player.getInventory().addItem(is);
 							

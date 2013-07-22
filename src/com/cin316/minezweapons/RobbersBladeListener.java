@@ -1,5 +1,7 @@
 package com.cin316.minezweapons;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -10,16 +12,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.cin316.minezweapons.MineZWeapons;
 
-public class KikuichimonjiListener implements Listener{
+public class RobbersBladeListener implements Listener{
 	
 	MineZWeapons plugin;
 	
-	public KikuichimonjiListener(MineZWeapons plugin){
+	public RobbersBladeListener(MineZWeapons plugin){
 		this.plugin = plugin;
 	}
 	
@@ -46,23 +50,41 @@ public class KikuichimonjiListener implements Listener{
 					//Check if the hitter is holding a Kikuichimonji and it is a wood sword.
 					if( hitter.getItemInHand().getType().equals(Material.WOOD_SWORD) ){
 						if( hitter.getItemInHand().getItemMeta().hasDisplayName() ){
-							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.ITALIC + "Kikuichimonji") ){
+							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.ITALIC + "Robber's Blade") ){
 								
 								//Do stuff.
-								//Generate a random number between 1 and 3.
-								Random rand = new Random();
-								int n = rand.nextInt(3) + 1;
-								Random rand2 = new Random();
-								int n2 = rand2.nextInt(3) + 1;
+								ItemStack blade = hitter.getItemInHand();
+								Inventory hurtInventory = hurted.getInventory();
+								ItemStack stolenItem = null;
 								
-								if(n==1){
-									//Poison the hurted.
-									hurted.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1) );
+								//Generate random numbers.
+								while(stolenItem==null){
+									Random rand = new Random();
+									int n = rand.nextInt(hurtInventory.getSize());
+									
+									//Iterate through inventory.
+									Iterator it = ((Map) hurtInventory).entrySet().iterator();
+									while (it.hasNext()) {
+										Map.Entry pairs = (Map.Entry)it.next();
+										if(pairs!=null){
+											Integer key = (Integer) pairs.getKey();
+											ItemStack value = (ItemStack) pairs.getValue();
+											
+											if( new Integer(n).equals(key) ){ //If this is the random inventory slot
+												stolenItem = value;
+												//Remove from hurted's inventory.
+												hurtInventory.setItem(n, null);
+												break;
+											}
+										}
+										it.remove(); // avoids a ConcurrentModificationException.
+									}
 								}
-								if(n2==1){
-									//Poison the hurter.
-									hitter.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1) );
-								}
+								//Add to hitter's inventory.
+								hitter.getInventory().addItem(stolenItem);
+								
+								//Break Robber's Blade.
+								blade.setDurability((short) 0);
 							
 							}
 						}
