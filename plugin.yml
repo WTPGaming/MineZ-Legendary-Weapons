@@ -1,0 +1,17 @@
+name: MineZ Legendary Weapons
+main: com.cin316.minezweapons.MineZWeapons
+version: 1.0
+description: Adds MineZ's Legendary Weapons to the vanilla game.
+commands:
+  commandblockperms:
+    description: Gives info on Command Block Perms!
+    usage: /commandblockperms
+    permission: minezweapons.info
+    permission-message: You don't have permissions to use commandblockperms.info.
+permissions:
+  minezweapons.info:
+    description: Allows you to check MineZ Weapon's info (name, version, etc.).
+    default: true
+  minezweapons.use:
+    description: Allows you to use MineZ Weapon's Custom Weapons.
+    default: true
