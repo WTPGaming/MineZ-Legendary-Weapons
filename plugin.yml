@@ -5,7 +5,7 @@ description: Adds MineZ's Legendary Weapons to the vanilla game.
 commands:
   minezweapons:
     description: Gives info on MineZ Legendary Weapons!
-    usage: /minezweapons <help|give>
+    usage: /minezweapons <help|give> [weapon]
     permission: minezweapons.info
     permission-message: You don't have permissions to use minezweapons.info.
 permissions:
