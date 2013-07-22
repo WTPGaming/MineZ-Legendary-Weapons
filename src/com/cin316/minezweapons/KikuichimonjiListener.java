@@ -43,23 +43,27 @@ public class KikuichimonjiListener implements Listener{
 					Player hitter = (Player)damageCause.getDamager();
 					
 					//Check if the hitter is holding a Kikuichimonji and it is a wood sword.
-					if( hitter.getItemInHand().getItemMeta().getDisplayName().equals("\u00a7oKikuichimonji") && hitter.getItemInHand().getType().equals(Material.WOOD_SWORD) ){
-						
-						//Generate a random number between 1 and 3.
-						Random rand = new Random();
-						int n = rand.nextInt(3) + 1;
-						Random rand2 = new Random();
-						int n2 = rand.nextInt(3) + 1;
-						
-						if(n==1){
-							//Poison the hurted.
-							hurted.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 1, 60) );
+					if( hitter.getItemInHand().getType().equals(Material.WOOD_SWORD) ){
+						if( hitter.getItemInHand().getItemMeta().hasDisplayName() ){
+							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals("\u00a7oKikuichimonji") ){
+							
+								//Generate a random number between 1 and 3.
+								Random rand = new Random();
+								int n = rand.nextInt(3) + 1;
+								Random rand2 = new Random();
+								int n2 = rand2.nextInt(3) + 1;
+								
+								if(n==1){
+									//Poison the hurted.
+									hurted.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1) );
+								}
+								if(n2==1){
+									//Poison the hurter
+									hurted.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1) );
+								}
+							
+							}
 						}
-						if(n2==1){
-							//Poison the hurter
-							hurted.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 1, 60) );
-						}
-						
 					}
 					
 				}
