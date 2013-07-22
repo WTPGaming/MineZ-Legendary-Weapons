@@ -58,8 +58,8 @@ public class KikuichimonjiListener implements Listener{
 									hurted.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1) );
 								}
 								if(n2==1){
-									//Poison the hurter
-									hurted.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1) );
+									//Poison the hurter.
+									hitter.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 60, 1) );
 								}
 							
 							}
