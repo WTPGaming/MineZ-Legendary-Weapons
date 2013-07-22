@@ -45,6 +45,9 @@ public class MineZWeapons extends JavaPlugin{
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		
+		if(args.length>=1){
+			return false;
+		}
 		
 		if( commandLabel.equalsIgnoreCase("minezweapons") ){
 			
@@ -64,25 +67,31 @@ public class MineZWeapons extends JavaPlugin{
 					}
 					
 				}
-			}else if( args[0].equalsIgnoreCase("kikuichimonji") ){
+			}else if( args[0].equalsIgnoreCase("give") ){
 				if( !(sender instanceof Player) ){ //If the console sends the command.
 					ConsoleCommandSender console = (ConsoleCommandSender) sender;
 					
 					console.sendMessage("You must be a player to use this command.");
 					
 				}else{ //If a player sends the command.
-					Player player = (Player) sender;
-					
-					if(player.hasPermission("minezweapons.use")){ //If the player has permission.
-						ItemStack is = new ItemStack(Material.WOOD_SWORD, 1); //Make a stack of 1 Wood Sword
-						ItemMeta im = is.getItemMeta();
-						im.setDisplayName("\u00a7oKikuichimonji"); //Set its name to KiKuichimonji.
-						is.setItemMeta(im);
-						player.getInventory().addItem(is);
-					}else{ //If the player doesn't has permission.
-						
+					if( args.length>=2){
+						return false;
 					}
 					
+					if( args[1].equalsIgnoreCase("kikuichimonji") ){
+						Player player = (Player) sender;
+						
+						if(player.hasPermission("minezweapons.use")){ //If the player has permission.
+							ItemStack is = new ItemStack(Material.WOOD_SWORD, 1); //Make a stack of 1 Wood Sword
+							ItemMeta im = is.getItemMeta();
+							im.setDisplayName("\u00a7oKikuichimonji"); //Set its name to KiKuichimonji.
+							is.setItemMeta(im);
+							player.getInventory().addItem(is);
+						}else{ //If the player doesn't has permission.
+							
+						}
+						
+					}
 				}
 			}
 			
