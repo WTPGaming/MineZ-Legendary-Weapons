@@ -45,7 +45,7 @@ public class MineZWeapons extends JavaPlugin{
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		
-		if(args.length>=1){
+		if( !(args.length>=1) ){
 			return false;
 		}
 		
@@ -74,7 +74,7 @@ public class MineZWeapons extends JavaPlugin{
 					console.sendMessage("You must be a player to use this command.");
 					
 				}else{ //If a player sends the command.
-					if( args.length>=2){
+					if( !(args.length>=2) ){
 						return false;
 					}
 					
