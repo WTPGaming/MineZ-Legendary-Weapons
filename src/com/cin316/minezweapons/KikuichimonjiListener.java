@@ -2,6 +2,7 @@ package com.cin316.minezweapons;
 
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -45,7 +46,7 @@ public class KikuichimonjiListener implements Listener{
 					//Check if the hitter is holding a Kikuichimonji and it is a wood sword.
 					if( hitter.getItemInHand().getType().equals(Material.WOOD_SWORD) ){
 						if( hitter.getItemInHand().getItemMeta().hasDisplayName() ){
-							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals("\u00a7oKikuichimonji") ){
+							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.ITALIC + "Kikuichimonji") ){
 							
 								//Generate a random number between 1 and 3.
 								Random rand = new Random();

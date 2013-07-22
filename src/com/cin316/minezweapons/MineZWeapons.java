@@ -24,6 +24,7 @@ public class MineZWeapons extends JavaPlugin{
 	PluginDescriptionFile pdfFile;
 	PluginManager pluginManager;
 	public String[] helpText;
+	public String[] weapons;
 	
 	public void onEnable(){
 		log = Logger.getLogger("Minecraft");
@@ -32,6 +33,10 @@ public class MineZWeapons extends JavaPlugin{
 		helpText = new String[]{
 			ChatColor.YELLOW + pdfFile.getName() + " version " + pdfFile.getVersion(),
 			ChatColor.YELLOW + pdfFile.getDescription()
+		};
+		weapons = new String[]{
+				ChatColor.YELLOW + "" + "Weapons available:",
+				ChatColor.YELLOW + "" + ChatColor.BOLD + "Kikuichimonji"
 		};
 		
 		log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " has been enabled.");
@@ -74,24 +79,42 @@ public class MineZWeapons extends JavaPlugin{
 					console.sendMessage("You must be a player to use this command.");
 					
 				}else{ //If a player sends the command.
+					Player player = (Player) sender;
+					
 					if( !(args.length>=2) ){
 						return false;
 					}
-					
-					if( args[1].equalsIgnoreCase("kikuichimonji") ){
-						Player player = (Player) sender;
-						
-						if(player.hasPermission("minezweapons.use")){ //If the player has permission.
+					if(player.hasPermission("minezweapons.use")){ //If the player has permission.
+						if( args[1].equalsIgnoreCase("kikuichimonji") ){
+							
 							ItemStack is = new ItemStack(Material.WOOD_SWORD, 1); //Make a stack of 1 Wood Sword
 							ItemMeta im = is.getItemMeta();
-							im.setDisplayName("\u00a7oKikuichimonji"); //Set its name to KiKuichimonji.
+							im.setDisplayName(ChatColor.ITALIC + "Kikuichimonji"); //Set its name to KiKuichimonji.
 							is.setItemMeta(im);
 							player.getInventory().addItem(is);
-						}else{ //If the player doesn't has permission.
 							
+						}else{
+							player.sendMessage(ChatColor.RED + "Invalid weapon.  Type " + ChatColor.ITALIC + "minezweapons list" + ChatColor.RESET + ChatColor.RED + " to get a list of all weapons.");
 						}
-						
 					}
+					
+				}
+			}else if( args[0].equalsIgnoreCase("list") ){
+				if( !(sender instanceof Player) ){ //If the console sends the command.
+					ConsoleCommandSender console = (ConsoleCommandSender) sender;
+					
+					console.sendMessage(weapons);
+					
+				}else{ //If a player sends the command.
+					Player player = (Player) sender;
+					
+					if( !(args.length>=2) ){
+						return false;
+					}
+					if(player.hasPermission("minezweapons.info")){ //If the player has permission.
+						player.sendMessage(weapons);
+					}
+					
 				}
 			}
 			
