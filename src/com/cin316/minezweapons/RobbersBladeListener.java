@@ -56,30 +56,22 @@ public class RobbersBladeListener implements Listener{
 								ItemStack blade = hitter.getItemInHand();
 								Inventory hurtInventory = hurted.getInventory();
 								ItemStack stolenItem = null;
+								int n = 0;
 								
-								//Generate random numbers.
+								//Iterate through random inventory slots until we find one that is filled.
 								while(stolenItem==null){
 									Random rand = new Random();
-									int n = rand.nextInt(hurtInventory.getSize());
-									
-									//Iterate through inventory.
-									Iterator it = ((Map) hurtInventory).entrySet().iterator();
-									while (it.hasNext()) {
-										Map.Entry pairs = (Map.Entry)it.next();
-										if(pairs!=null){
-											Integer key = (Integer) pairs.getKey();
-											ItemStack value = (ItemStack) pairs.getValue();
-											
-											if( new Integer(n).equals(key) ){ //If this is the random inventory slot
-												stolenItem = value;
-												//Remove from hurted's inventory.
-												hurtInventory.setItem(n, null);
-												break;
-											}
-										}
-										it.remove(); // avoids a ConcurrentModificationException.
+									n = rand.nextInt(hurtInventory.getSize());
+									ItemStack value = hurtInventory.getItem(n);
+										
+									if( value!=null ){ //If value is an Item.
+										stolenItem = value;
 									}
 								}
+								
+								//Remove from hurted's inventory.
+								hurtInventory.setItem(n, null);
+								
 								//Add to hitter's inventory.
 								hitter.getInventory().addItem(stolenItem);
 								

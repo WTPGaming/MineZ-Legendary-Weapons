@@ -118,9 +118,6 @@ public class MineZWeapons extends JavaPlugin{
 				}else{ //If a player sends the command.
 					Player player = (Player) sender;
 					
-					if( !(args.length>=2) ){
-						return false;
-					}
 					if(player.hasPermission("minezweapons.info")){ //If the player has permission.
 						player.sendMessage(weapons);
 					}
