@@ -76,7 +76,7 @@ public class RobbersBladeListener implements Listener{
 								hitter.getInventory().addItem(stolenItem);
 								
 								//Break Robber's Blade.
-								blade.setDurability((short) 0);
+								blade.setDurability((short) 60);
 							
 							}
 						}
