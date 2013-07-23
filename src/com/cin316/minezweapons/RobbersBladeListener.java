@@ -1,7 +1,5 @@
 package com.cin316.minezweapons;
 
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.ChatColor;
@@ -14,8 +12,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import com.cin316.minezweapons.MineZWeapons;
 
@@ -53,7 +49,6 @@ public class RobbersBladeListener implements Listener{
 							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.ITALIC + "Robber's Blade") ){
 								
 								//Do stuff.
-								ItemStack blade = hitter.getItemInHand();
 								Inventory hurtInventory = hurted.getInventory();
 								ItemStack stolenItem = null;
 								int n = 0;
@@ -68,7 +63,7 @@ public class RobbersBladeListener implements Listener{
 										
 									if( value!=null ){ //If value is an Item.
 										stolenItem = value;
-									}else if(i>=hurtInventory.getSize()){
+									}else if(i>hurtInventory.getSize()){
 										hitter.sendMessage(ChatColor.RED + hurted.getDisplayName() + ChatColor.RESET + ChatColor.RED + "\'s inventory is empty.");
 										break;
 									}
@@ -81,7 +76,7 @@ public class RobbersBladeListener implements Listener{
 									hitter.getInventory().addItem(stolenItem);
 									
 									//Break Robber's Blade.
-									blade.setAmount(0);
+									hitter.getInventory().setItemInHand(null);
 								}
 								
 							}
