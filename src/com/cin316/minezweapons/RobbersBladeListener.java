@@ -47,7 +47,7 @@ public class RobbersBladeListener implements Listener{
 					//Get the variable for the player who punched someone
 					Player hitter = (Player)damageCause.getDamager();
 					
-					//Check if the hitter is holding a Kikuichimonji and it is a wood sword.
+					//Check if the hitter is holding a Robber's Blade and it is a wood sword.
 					if( hitter.getItemInHand().getType().equals(Material.WOOD_SWORD) ){
 						if( hitter.getItemInHand().getItemMeta().hasDisplayName() ){
 							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.ITALIC + "Robber's Blade") ){
@@ -57,27 +57,33 @@ public class RobbersBladeListener implements Listener{
 								Inventory hurtInventory = hurted.getInventory();
 								ItemStack stolenItem = null;
 								int n = 0;
+								int i = 0;
 								
 								//Iterate through random inventory slots until we find one that is filled.
 								while(stolenItem==null){
+									i++;
 									Random rand = new Random();
 									n = rand.nextInt(hurtInventory.getSize());
 									ItemStack value = hurtInventory.getItem(n);
 										
 									if( value!=null ){ //If value is an Item.
 										stolenItem = value;
+									}else if(i>=hurtInventory.getSize()){
+										hitter.sendMessage(ChatColor.RED + hurted.getDisplayName() + ChatColor.RESET + ChatColor.RED + "\'s inventory is empty.");
+										break;
 									}
 								}
+								if(stolenItem != null){
+									//Remove from hurted's inventory.
+									hurtInventory.setItem(n, null);
+									
+									//Add to hitter's inventory.
+									hitter.getInventory().addItem(stolenItem);
+									
+									//Break Robber's Blade.
+									blade.setAmount(0);
+								}
 								
-								//Remove from hurted's inventory.
-								hurtInventory.setItem(n, null);
-								
-								//Add to hitter's inventory.
-								hitter.getInventory().addItem(stolenItem);
-								
-								//Break Robber's Blade.
-								blade.setDurability((short) 60);
-							
 							}
 						}
 					}
