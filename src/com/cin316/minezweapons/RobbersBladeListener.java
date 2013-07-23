@@ -50,6 +50,7 @@ public class RobbersBladeListener implements Listener{
 								
 								//Do stuff.
 								Inventory hurtInventory = hurted.getInventory();
+								ItemStack blade = hitter.getItemInHand();
 								ItemStack stolenItem = null;
 								int n = 0;
 								int i = 0;
@@ -77,6 +78,9 @@ public class RobbersBladeListener implements Listener{
 									
 									//Break Robber's Blade.
 									hitter.getInventory().setItemInHand(null);
+								}else{
+									//Make sure Robber's Blade doesn't break.
+									blade.setDurability((short) 0);
 								}
 								
 							}
