@@ -14,9 +14,6 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.cin316.minezweapons.KikuichimonjiListener;
-import com.cin316.minezweapons.MineZWeapons;
-
 public class MineZWeapons extends JavaPlugin{
 	
 	public static MineZWeapons plugin;
@@ -45,6 +42,7 @@ public class MineZWeapons extends JavaPlugin{
 		
 		pluginManager.registerEvents( new KikuichimonjiListener(this), this );
 		pluginManager.registerEvents( new RobbersBladeListener(this), this );
+		pluginManager.registerEvents( new SimoonsDealListener(this), this);
 	}
 	
 	public void onDisable(){

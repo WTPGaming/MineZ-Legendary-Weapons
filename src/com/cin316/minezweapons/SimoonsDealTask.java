@@ -20,11 +20,11 @@ public class SimoonsDealTask extends BukkitRunnable {
 		//Strikes the player with lightning.
 		player.getWorld().strikeLightning(player.getLocation());
 		//Gives the hitter Nausea I for 60 seconds.
-		player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1200, 1) );
+		player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1200, 0) );
 		//Gives the hitter Weakness I for 60 seconds.
-		player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1200, 1) );
+		player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 1200, 0) );
 		//Gives the hitter Slowness I for 60 seconds.
-		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1200, 1) );
+		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1200, 0) );
 		
 	}
 
