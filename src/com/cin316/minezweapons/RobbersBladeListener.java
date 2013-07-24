@@ -23,6 +23,7 @@ public class RobbersBladeListener implements Listener{
 		this.plugin = plugin;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent event) {
 	    
@@ -78,6 +79,10 @@ public class RobbersBladeListener implements Listener{
 									
 									//Break Robber's Blade.
 									hitter.getInventory().setItemInHand(null);
+									
+									//Update players' inventories.
+									hitter.updateInventory();
+									hurted.updateInventory();
 								}else{
 									//Make sure Robber's Blade doesn't break.
 									blade.setDurability((short) 0);

@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -19,6 +18,7 @@ public class SimoonsDealListener implements Listener {
 		this.plugin = plugin;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		
@@ -35,6 +35,9 @@ public class SimoonsDealListener implements Listener {
 						
 						//Destroys Simoon's Deal.
 						hitter.setItemInHand(null);
+						
+						//Update hitter's inventory.
+						hitter.updateInventory();
 						
 						//Gives the hitter Speed II for 60 seconds.
 						hitter.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1200, 1) );
