@@ -42,7 +42,7 @@ public class SimoonsDealListener implements Listener {
 						hitter.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1200, 0) );
 						
 						//Schedules SimoonsDealTask to be run in 60 seconds.
-						//new SimoonsDealTask(plugin, hitter).runTaskLater(plugin, 1200);
+						new SimoonsDealTask(plugin, hitter).runTaskLater(plugin, 1200);
 						
 					}
 				}
