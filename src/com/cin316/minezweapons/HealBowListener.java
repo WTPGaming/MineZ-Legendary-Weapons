@@ -1,29 +1,24 @@
 package com.cin316.minezweapons;
 
-import java.util.Random;
-
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
-import org.bukkit.Effect.Type;
-import org.bukkit.EntityEffect;
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 
-public class GrassBladeListener implements Listener {
+public class HealBowListener implements Listener {
 	
 	MineZWeapons plugin;
 	
-	public GrassBladeListener(MineZWeapons plugin){
+	public HealBowListener(MineZWeapons plugin){
 		this.plugin = plugin;
 	}
 	
 	@EventHandler
-	public void onEntityDamage(EntityDamageEvent event) {
+	public void onEntityDamangeByEntity(EntityDamageByEntityEvent event){
 		
 		Entity entity = event.getEntity();
 		//Check if the entity getting hit is a player
@@ -36,19 +31,20 @@ public class GrassBladeListener implements Listener {
 				
 				//Get a variable for the cause of the damage
 				EntityDamageByEntityEvent damageCause = (EntityDamageByEntityEvent)event;
-				//Check if the damager is a player
-				if (damageCause.getDamager() instanceof Player){
+				//Check if the damager is an arrow.
+				if (damageCause.getDamager() instanceof Arrow){
 					
 					//Get the variable for the player who punched someone
-					Player hitter = (Player)damageCause.getDamager();
+					Player hitter = (Player)((Arrow)event.getDamager()).getShooter();
 					
 					//Check if the hitter is holding a Grass Blade and it is a wood sword.
-					if( hitter.getItemInHand().getType().equals(Material.WOOD_SWORD) ){
+					if( hitter.getItemInHand().getType().equals(Material.BOW) ){
 						if( hitter.getItemInHand().getItemMeta().hasDisplayName() ){
-							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.ITALIC + "Grass Blade") ){
+							if( hitter.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.ITALIC + "Heal Bow") ){
 								
 								//Do stuff.
-								//hurted.getWorld().playEffect(hurted.getLocation(), new Effect(2001, Type.SOUND, Material.GRASS.class), 2003);
+								event.setCancelled(true);
+								hurted.setHealth( hurted.getHealth()+3 );
 								
 							
 							}
@@ -60,7 +56,6 @@ public class GrassBladeListener implements Listener {
 			}
 			
 		}
-		
 		
 	}
 	
