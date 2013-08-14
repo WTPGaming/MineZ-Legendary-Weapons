@@ -37,7 +37,8 @@ public class MineZWeapons extends JavaPlugin{
 				ChatColor.YELLOW + "" + ChatColor.BOLD + "Robber's_Blade",
 				ChatColor.YELLOW + "" + ChatColor.BOLD + "Simoon's_Deal",
 				ChatColor.YELLOW + "" + ChatColor.BOLD + "Grass_Blade",
-				ChatColor.YELLOW + "" + ChatColor.BOLD + "Heal_Bow"
+				ChatColor.YELLOW + "" + ChatColor.BOLD + "Heal_Bow",
+				ChatColor.YELLOW + "" + ChatColor.BOLD + "Mjolnir"
 		};
 		
 		log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " has been enabled.");
@@ -48,6 +49,7 @@ public class MineZWeapons extends JavaPlugin{
 		pluginManager.registerEvents( new GrassBladeListener(this), this);
 		pluginManager.registerEvents( new GrassBladeListener(this), this);
 		pluginManager.registerEvents( new HealBowListener(this), this );
+		pluginManager.registerEvents( new MjolnirListener(this), this );
 	}
 	
 	public void onDisable(){
@@ -125,9 +127,17 @@ public class MineZWeapons extends JavaPlugin{
 							
 						}else if( args[1].equalsIgnoreCase("heal_bow") ){
 							
-							ItemStack is = new ItemStack(Material.BOW, 1); //Make a stack of 1 Wood Sword
+							ItemStack is = new ItemStack(Material.BOW, 1); //Make a stack of 1 Bow
 							ItemMeta im = is.getItemMeta();
 							im.setDisplayName(ChatColor.ITALIC + "Heal Bow"); //Set its name to Heal Bow.
+							is.setItemMeta(im);
+							player.getInventory().addItem(is);
+							
+						}else if( args[1].equalsIgnoreCase("mjolnir") ){
+							
+							ItemStack is = new ItemStack(Material.IRON_AXE, 1); //Make a stack of 1 Iron Axe
+							ItemMeta im = is.getItemMeta();
+							im.setDisplayName(ChatColor.ITALIC + "Mjolnir"); //Set its name to Heal Bow.
 							is.setItemMeta(im);
 							player.getInventory().addItem(is);
 							
